@@ -1,1 +1,1 @@
-(import ./release.nix).parconc-examples.env
+((import ./release.nix) { }).parconc-examples.env

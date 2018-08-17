@@ -30,3 +30,10 @@ cabal configure
 cabal build
 ```
 
+## Building with Nix / Cabal
+
+```
+nix-shell
+cabal configure
+cabal build
+```

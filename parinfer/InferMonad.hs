@@ -47,8 +47,8 @@ substituteI t         =  getSubI              `thenI`  (\ s ->
                                               returnI  (applySub s t))
 unifyI                :: MonoType -> MonoType -> Infer ()
 unifyI t u            =  getSubI              `thenI`  (\ s  ->
-			 let sM = unifySub t u s
-			 in
+       let sM = unifySub t u s
+       in
                          existsM sM           `guardI` (
                          putSubI (theM sM)    `thenI`  (\ () ->
                                               returnI  ())))

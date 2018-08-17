@@ -1,17 +1,33 @@
-{ compiler ? "ghc822" }:
+{ compiler ? "default" }:
 let
+
+  pkgs = import <nixpkgs> { inherit config; };
+
+  hsBasePath = if compiler == "default"
+               then pkgs.haskellPackages
+               else pkgs.haskell.packages.${compiler};
+
+
+  inherit (pkgs.haskell.lib) addBuildTools;
+
   config = {
     packageOverrides = pkgs: rec {
-      haskell = pkgs.haskell // {
-        "${compiler}" = pkgs.haskell.packages."{compiler}".override {
-          overrides = haskellPackagesNew: haskellPackagesOld: rec {
-            parconc-examples = pkgs.haskellPackages.callPackage ./parconc-examples.nix { };
-          };
+      haskellPackages =
+        ( if compiler == "default"
+          then pkgs.haskellPackages
+          else pkgs.haskell.packages.${compiler}).override
+        {
+           overrides = haskellPackagesNew: haskellPackagesOld: rec {
+             parconc-examples =
+               pkgs.haskellPackages.callPackage ./parconc-examples.nix { };
+           };
         };
-      };
     };
   };
-  pkgs = import <nixpkgs> { inherit config; };
+
 in {
-  parconc-examples = pkgs.haskell.packages.${compiler}.parconc-examples;
+  parconc-examples =
+    addBuildTools hsBasePath.parconc-examples
+    (with hsBasePath; [ alex happy ]);
+  #parconc-examples = hsBasePath.parconc-examples;
 }

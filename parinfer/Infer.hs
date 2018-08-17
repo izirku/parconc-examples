@@ -29,9 +29,9 @@ applySubs                     :: [TVarId] -> [MonoType] -> MonoType -> MonoType
 applySubs xxs yys tt          =  applySub (makeSub (zip xxs yys)) tt
 generaliseI                   :: Env -> MonoType -> Infer PolyType
 generaliseI aa tt             =  getSubI `thenI` (\s ->
- 				 let aaVars = nub (freeTVarSubEnv s aa) in
-				 let ttVars = nub (freeTVarMono tt) in
-				 let xxs    = ttVars `minus` aaVars in
+         let aaVars = nub (freeTVarSubEnv s aa) in
+         let ttVars = nub (freeTVarMono tt) in
+         let xxs    = ttVars `minus` aaVars in
                                  returnI (All xxs tt)
                                  )
 freeTVarSubEnv                :: Sub -> Env -> [TVarId]

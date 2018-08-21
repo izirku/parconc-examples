@@ -31,3 +31,4 @@ in {
     (with hsBasePath; [ alex happy ]);
   #parconc-examples = hsBasePath.parconc-examples;
 }
+

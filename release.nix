@@ -28,6 +28,5 @@ let
 in {
   parconc-examples =
     addBuildTools hsBasePath.parconc-examples
-    (with hsBasePath; [ alex happy ]);
-  #parconc-examples = hsBasePath.parconc-examples;
+    (with hsBasePath; [ alex happy ] ++ [ pkgs.gnuplot ]);
 }

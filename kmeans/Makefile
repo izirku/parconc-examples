@@ -16,3 +16,8 @@ points.bin : points
 
 view : points
 	gnuplot -e 'set terminal png; plot "points"' >points.png; eog points.png    
+
+.PHONY: clean
+clean:
+	@echo "Cleaning up..."
+	@rm -f *.o *.hi GenSamples clusters params points points.bin

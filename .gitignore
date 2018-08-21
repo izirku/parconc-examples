@@ -48,8 +48,12 @@ geturlsfirst
 geturlsstm
 index/docs
 kmeans/GenSamples
+kmeans/clusters
 kmeans/kmeans
 kmeans/kmeans-seq
+kmeans/params
+kmeans/points
+kmeans/points.bin
 logger
 mandel/mandel
 merge.hs

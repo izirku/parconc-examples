@@ -52,8 +52,7 @@ kmeans/clusters
 kmeans/kmeans
 kmeans/kmeans-seq
 kmeans/params
-kmeans/points
-kmeans/points.bin
+kmeans/points*
 logger
 mandel/mandel
 merge.hs

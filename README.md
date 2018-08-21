@@ -5,6 +5,7 @@ To build the code on your system, you need either:
 * [Stack](http://haskellstack.org)
 * [A Minimal GHC installation](https://www.haskell.org/downloads)
 * [The Haskell Platform](https://www.haskell.org/downloads#platform)
+* [Nix Package Manager](https://nixos.org/nix/)
 
 ## Building with Stack
 

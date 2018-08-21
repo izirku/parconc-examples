@@ -1,7 +1,7 @@
 GHC = ghc
 GHC_OPTS = -O2 -threaded -rtsopts
 
-all : points.bin
+all : kmeans points.bin
 
 kmeans : kmeans.hs KMeansCore.hs
 	$(GHC) $(GHC_OPTS) kmeans
@@ -14,10 +14,24 @@ points : GenSamples
 
 points.bin : points
 
-view : points
-	gnuplot -e 'set terminal png; plot "points"' >points.png; eog points.png    
+plot : points
+	gnuplot -e 'set terminal png; plot "points"' >points.png
+
+view : plot
+	@if [ -x "$(command -v xdg-open)" ]; then \
+		echo "Launching xdg-open..."; \
+		xdg-open points.png; \
+	elif [ -x "$(command -v open)" ]; then \
+		echo "Launching open..."; \
+		open points.png; \
+	elif [ -x "$(command -v eog)" ]; then \
+		echo "Launching EoG..."; \
+		eog points.png; \
+	else \
+		echo ".PNG launcher not found!"; \
+	fi
 
 .PHONY: clean
 clean:
 	@echo "Cleaning up..."
-	@rm -f *.o *.hi GenSamples clusters params points points.bin
+	@rm -f *.o *.hi kmeans GenSamples clusters params points*
